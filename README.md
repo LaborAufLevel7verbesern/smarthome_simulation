@@ -1,2 +1,1 @@
-# smarthome_simulation
-hallo
+#Projekt Q11 2014/15 IKG-Landsberg
