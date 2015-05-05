@@ -1,0 +1,70 @@
+from tkinter import *
+
+root = Tk()
+#Menus.def
+def menutest():
+    print("Test")
+
+
+#Temperatur.def
+def gettemp():
+    karl=temregel.get()
+    print(karl)
+
+def settemp():
+    frederick = settempein.get()
+    temregel.set(frederick)
+
+def manutemp():
+    #print(arnold.get())
+    if arnold.get()==1:
+        settemp.grid(row=3, column=0, sticky=E)
+        settempein.grid(row=3, column=1)
+    elif arnold.get()==0:
+        settemp.grid_forget()
+        settempein.grid_forget()
+
+
+#Licht.def
+def lichtan():
+    print("licht ist an")
+
+
+
+
+#Menu
+menu = Menu(root)
+root.config(menu=menu)
+Menus1=Menu(menu)
+menu.add_cascade(label="Menus1", menu=Menus1)
+Menus1.add_command(label="Auswahl1",command=menutest)
+
+#Frames
+Temp=Frame(root, cursor= "watch")
+Licht=Frame(root, cursor="spider")
+
+
+
+#Temperatur.Widget
+arnold=IntVar()
+setmanu=Checkbutton(Temp, text="Manuelle Temperatureingabe?", variable = arnold, command =manutemp)
+settempein = Entry(Temp)
+temregellable = Label(Temp, text = "Temperatur")
+temregel = Scale(Temp, from_ = -10, to= 40, orient = HORIZONTAL,length=200,tickinterval=10, cursor="watch")
+gettempknopf=Button(Temp, text="Hans Günther", command = gettemp)
+settemp = Button(Temp, text="Karl Gustav", command = settemp,cursor="pirate")
+
+#Licht.Widgets
+lichtmain=Button(Licht, text="Lichthauptschalter", command=lichtan)
+
+#Temperatur.grid
+Temp.grid(row=0,column=0)
+setmanu.grid(row=2, column=1)
+temregellable.grid(row=0, column=0)
+temregel.grid(row=0, column=1)
+gettempknopf.grid(row=1, columnspan=2)
+#Licht.grid
+Licht.grid(row=0,column=1)
+lichtmain.grid(row=0, column=0)
+
+root.mainloop()
