@@ -11,7 +11,6 @@ def menutest(menu):
         m.set(1)
     elif m.get() ==1:
         print("Test2")
-        +
         menu.entryconfigure(1, label="Auswahl1")
         m.set(0)
 
