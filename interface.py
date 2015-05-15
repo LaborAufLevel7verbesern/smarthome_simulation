@@ -11,8 +11,25 @@ def menutest(menu):
         m.set(1)
     elif m.get() ==1:
         print("Test2")
+        
         menu.entryconfigure(1, label="Auswahl1")
         m.set(0)
+mt=IntVar()
+def manutemp(menu):
+    if mt.get()==0:
+        #print("Test")
+        menu.entryconfigure(1, label="☑ Manuelle Temperatureingabe")
+        manutemplabel.grid(row=3, columnspan=2) 
+        settempein.grid(row=4, columnspan=2)
+        mt.set(1)
+    elif mt.get() ==1:
+        #print("Test2")
+        menu.entryconfigure(1, label="☐ Manuelle Temperatureingabe")
+        settempein.grid_forget()
+        manutemplabel.grid_forget()
+        mt.set(0)
+
+
 
 #Temperatur.def
 def gettemp(event):
@@ -28,17 +45,18 @@ def settemp(event):
         sneaky=Message(hans,text=sepp)
         sneaky.config(bg="white",fg="black",font=("aral",30,"bold"),borderwidth=2)
         sneaky.grid(rowspan=2,columnspan=3)
+    elif frederick == "":
+        karlgustav=Tk()
+        arnold="Error-404 Not Found"
+        nab=Message(karlgustav,text=arnold)
+        nab.config(bg="white",fg="black",font=("aral",20,"bold"),borderwidth=2)
+        nab.grid(rowspan=2,columnspan=3)
+
+    
+    
     else:
         temregel.set(frederick)
-
-def manutemp(event):
-    #print(arnold.get())
-    if arnold.get()==0:
-        settempknopf.grid(row=4, column=0, sticky=E)
-        settempein.grid(row=4, column=1)
-    elif arnold.get()==1:
-        settempknopf.grid_forget()
-        settempein.grid_forget()
+        
 
 
 #Licht.def
@@ -71,7 +89,9 @@ root.config(menu=menu)
 Menus1=Menu(menu)
 menu.add_cascade(label="Menus1", menu=Menus1)
 Menus1.add_command(label="Auswahl1",command=lambda: menutest(Menus1))
-
+Menus2=Menu(menu)
+menu.add_cascade(label="Einstellungen", menu = Menus2)
+Menus2.add_command(label="☐ Manuelle Temperatureingabe",command=lambda: manutemp(Menus2))
 
 
 
@@ -81,17 +101,12 @@ Licht=Frame(root, cursor="spider")
 Fenster=Frame(root,cursor="pirate")
 Tür=Frame(root,cursor="star")
 
-
-
 #Temperatur.Widget
-arnold=IntVar()
-setmanu=Checkbutton(Temp, text="Manuelle Temperatureingabe?", variable = arnold)
 settempein = Entry(Temp)
 temregellable = Label(Temp, text = "Temperatur")
 temregel = Scale(Temp, from_ = -10, to= 40, orient = HORIZONTAL,length=200,tickinterval=10, cursor="watch")
 gettempknopf = Button(Temp, text="Hans Günther")
-settempknopf = Button(Temp, text="Karl Gustav")
-
+manutemplabel=Label(Temp, text="Manuelle Temperatursteuerung",font=("Arial",10,"normal","underline"))
 #Licht.Widgets
 lichtmain=Button(Licht, text="Lichthauptschalter")
 
@@ -104,15 +119,13 @@ dachfenster=Button(Fenster,text="Dach")
 templabel= Label(Temp,text="Temperatur",font=("Arial",15,"bold","underline"))
 lichtlabel = Label(Licht, text="Licht",font=("Arial",15,"bold","underline"))
 fensterlabel = Label(Fenster, text="Fenster",font=("Arial",15,"bold","underline"))
-türlabel = Label(Tür, text="Türen",font=("Arial",15,"bold","underline"))
+türlabel = Label(Tür, text="Türen und Tore",font=("Arial",15,"bold","underline"))
 
 
 
 #Temperatur.bind
-setmanu.bind("<Button-1>", manutemp)
 gettempknopf.bind("<Button-1>", gettemp)
-settempknopf.bind("<Button-1>",settemp)
-
+settempein.bind("<Return>",settemp)
 #Licht.bind
 lichtmain.bind("<Button-1>",lichtan)
 
@@ -134,7 +147,6 @@ türlabel.grid(row=0,columnspan=3)
 
 #Temperatur.grid
 Temp.grid(row=1,column=0,sticky=N)
-setmanu.grid(row=3, column=1)
 temregellable.grid(row=1, column=0)
 temregel.grid(row=1, column=1)
 gettempknopf.grid(row=2, columnspan=2)
@@ -152,6 +164,3 @@ Tür.grid(row=2,column=1,sticky=N)
               
 
 root.mainloop()
-
-
-
