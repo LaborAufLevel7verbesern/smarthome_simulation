@@ -17,16 +17,11 @@ c.executemany("INSERT INTO wetter VALUES (?, ?, ?, ?)", [(time, temp, speed, hum
 
 # Save (commit) the changes
 conn.commit()
-#if c.execute("SELECT COUNT (time) FROM wetter")>5:
-  #  print("VOLL")
-#else:
-  #  pass
-
-c.execute("select * from wetter")
-r = c.fetchone()
-print(r[0])
-
-f = c.execute("select count(time) from wetter")
-f = c.fetchone()
-print(f[0])
+c.execute("select * from wetter;")
+if c.execute("SELECT COUNT (time) FROM wetter")>5:
+    print("VOLL")
+else:
+    pass
+print(c.fetchall())
 conn.close()
+
