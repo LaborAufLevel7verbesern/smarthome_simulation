@@ -1,0 +1,8 @@
+
+import urllib.request
+proxy = {'http': 'http://10.0.0.203:8080'}
+opener = urllib.request.FancyURLopener(proxy)
+#opener.addheaders = [( 'User-agent' , 'Mozilla/5.0')]
+#proxy_handler = urllib.request.ProxyHandler({'http://weather.tuxnet24.de/?id=GMXX1210',})
+weather = opener.open("http://weather.tuxnet24.de/?id=GMXX1210")
+print(weather.read())
