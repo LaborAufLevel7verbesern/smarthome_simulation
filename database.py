@@ -24,4 +24,3 @@ else:
     pass
 print(c.fetchall())
 conn.close()
-
